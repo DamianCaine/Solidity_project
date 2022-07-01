@@ -29,21 +29,24 @@ contract CoinFlip{
         uint bet;
     }
 
+    //adding betters
     function addBetters(uint _id, address payable _walletAddress, uint _betAmount, uint _bet) public payable onlyOwner{
         betters[_id]=Better(_walletAddress, _betAmount, _bet);
     }
 
+    //checking if betters have enough balance to bet
     function checkBalance(uint _id) public view returns(uint){
         require(betters[_id].betAmount<(betters[_id].walletAddress).balance, "Insufficient funds!");
         return (betters[_id].walletAddress).balance;        
     }
 
+    //random coin flip
     function coinFlip() public onlyOwner{
         flip= uint(keccak256(abi.encodePacked(block.timestamp,block.difficulty,msg.sender)))%2;
         console.log(flip);
     }
 
-
+    //checking if any betters won
     function checkBet(uint _id) public payable{
         if(betters[_id].bet == flip){
             (betters[_id].walletAddress).transfer(msg.value);
