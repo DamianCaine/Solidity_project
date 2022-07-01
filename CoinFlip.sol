@@ -6,6 +6,12 @@ import 'hardhat/console.sol';
 pragma solidity ^0.8.7;
 
 contract CoinFlip{
+    /*
+        Name: Siddharth Mondal
+        University: VIT University, Vellore
+        Reg. No.: 18BME0155
+        Submission for Web3 task
+    */
     address owner;
     mapping(uint => Better) betters;
     uint flip;
